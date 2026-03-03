@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripFactory UK - European ORN Control Structure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%); }
+        .uk-hub { background: linear-gradient(145deg, #1e40af 0%, #3b82f6 100%); }
+        .india-hub { background: linear-gradient(145deg, #ea580c 0%, #f97316 100%); }
+        .europe-dest { background: linear-gradient(145deg, #7c3aed 0%, #a855f7 100%); }
+        .control-line { stroke: #3b82f6; stroke-width: 3; fill: none; stroke-dasharray: 8,4; animation: flow 2s linear infinite; }
+        .instruction-line { stroke: #f97316; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+        .dm-line { stroke: #10b981; stroke-width: 2; fill: none; stroke-dasharray: 4,4; }
+        @keyframes flow { to { stroke-dashoffset: -24; } }
+        .node { transition: all 0.3s ease; cursor: pointer; }
+        .node:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .staff-count { font-variant-numeric: tabular-nums; }
+        .staff-card { transition: all 0.2s ease; }
+        .staff-card:hover { background-color: #f8fafc; transform: translateX(4px); }
+        .email-link { color: #3b82f6; word-break: break-all; }
+        .email-link:hover { text-decoration: underline; }
+        .location-badge { font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+        .blr { background: #dbeafe; color: #1e40af; }
+        .bom { background: #fce7f3; color: #9d174d; }
+        .gur { background: #dcfce7; color: #166534; }
+        .business-card { transition: all 0.3s ease; }
+        .business-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .fleet-item { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+        .tab-active { border-bottom: 3px solid #3b82f6; color: #1e40af; }
+        .tab-inactive { color: #64748b; }
+        .tab-inactive:hover { color: #3b82f6; }
+        .speed-dating-card { transition: all 0.3s ease; }
+        .speed-dating-card:hover { transform: scale(1.02); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .timeline-item { position: relative; padding-left: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; }
+        .timeline-item::after { content: ''; position: absolute; left: 5px; top: 20px; width: 2px; height: calc(100% - 12px); background: #e2e8f0; }
+        .timeline-item:last-child::after { display: none; }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-slate-100 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <div class="bg-white/20 p-3 rounded-xl">
+                        <i class="fas fa-sitemap text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">TripFactory UK</h1>
+                        <p class="text-sm text-blue-100">European ORN Control Structure</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 text-sm">
+                    <div class="text-right">
+                        <div class="text-blue-200">UK Control Hub</div>
+                        <div class="font-bold">London</div>
+                    </div>
+                    <div class="h-8 w-px bg-white/30"></div>
+                    <div class="text-right">
+                        <div class="text-blue-200">India Execution</div>
+                        <div class="font-bold">103 Staff</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Navigation Tabs -->
+    <div class="bg-white shadow-sm border-b border-slate-200 sticky top-[72px] z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-8">
+                <button onclick="showTab('structure')" id="tab-structure" class="tab-active py-4 px-2 font-semibold text-sm flex items-center gap-2">
+                    <i class="fas fa-sitemap"></i> Org Structure
+                </button>
+                <button onclick="showTab('roadshow')" id="tab-roadshow" class="tab-inactive py-4 px-2 font-semibold text-sm flex items-center gap-2">
+                    <i class="fas fa-handshake"></i> European Roadshow
+                </button>
+                <button onclick="showTab('responsibilities')" id="tab-responsibilities" class="tab-inactive py-4 px-2 font-semibold text-sm flex items-center gap-2">
+                    <i class="fas fa-tasks"></i> Roles & Responsibilities
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- TAB 1: ORG STRUCTURE -->
+        <div id="content-structure" class="tab-content">
+            <!-- SVG Diagram -->
+            <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8 overflow-x-auto">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2 text-center">European ORN Command & Control Flow</h2>
+                <p class="text-center text-slate-500 mb-8">UK manages contracting and strategy → India executes sales and operations</p>
+
+                <svg viewBox="0 0 1400 950" class="w-full min-w-[1200px]" style="max-height: 950px;">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#f97316" />
+                        </marker>
+                        <marker id="control-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
+                        </marker>
+                        <marker id="dm-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" />
+                        </marker>
+                    </defs>
+
+                    <!-- UK COMMAND CENTRE -->
+                    <g class="node" onclick="showUKDetails()">
+                        <rect x="450" y="20" width="500" height="120" rx="16" class="uk-hub" />
+                        <text x="700" y="55" text-anchor="middle" fill="white" font-size="20" font-weight="bold">🇬🇧 UK COMMAND CENTRE</text>
+                        <text x="700" y="80" text-anchor="middle" fill="#bfdbfe" font-size="13">London | European ORN Control</text>
+                        <text x="700" y="105" text-anchor="middle" fill="white" font-size="12">Contracting • Strategy • Commercial • Creative</text>
+
+                        <rect x="470" y="130" width="110" height="35" rx="6" fill="#1e40af" opacity="0.9" />
+                        <text x="525" y="152" text-anchor="middle" fill="white" font-size="11">Contracting</text>
+
+                        <rect x="590" y="130" width="110" height="35" rx="6" fill="#1e40af" opacity="0.9" />
+                        <text x="645" y="152" text-anchor="middle" fill="white" font-size="11">Commercial</text>
+
+                        <rect x="710" y="130" width="110" height="35" rx="6" fill="#1e40af" opacity="0.9" />
+                        <text x="765" y="152" text-anchor="middle" fill="white" font-size="11">Creative</text>
+
+                        <rect x="830" y="130" width="110" height="35" rx="6" fill="#1e40af" opacity="0.9" />
+                        <text x="885" y="152" text-anchor="middle" fill="white" font-size="11">Admin</text>
+                    </g>
+
+                    <!-- Control Lines UK → Europe -->
+                    <path d="M 525 165 Q 400 220 250 280" class="control-line" marker-end="url(#control-arrow)" />
+                    <path d="M 600 165 Q 500 220 450 280" class="control-line" marker-end="url(#control-arrow)" />
+                    <path d="M 700 165 Q 700 220 700 280" class="control-line" marker-end="url(#control-arrow)" />
+                    <path d="M 800 165 Q 900 220 950 280" class="control-line" marker-end="url(#control-arrow)" />
+                    <path d="M 875 165 Q 1000 220 1150 280" class="control-line" marker-end="url(#control-arrow)" />
+
+                    <!-- EUROPEAN DESTINATIONS -->
+                    <g class="node">
+                        <rect x="50" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('paris')" />
+                        <text x="110" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇫🇷 Paris</text>
+                        <text x="110" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">France</text>
+                        <text x="110" y="338" text-anchor="middle" fill="#fef08a" font-size="10">Active</text>
+
+                        <rect x="190" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('germany')" />
+                        <text x="250" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇩🇪 Germany</text>
+                        <text x="250" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Berlin/Munich</text>
+                        <text x="250" y="338" text-anchor="middle" fill="#bfdbfe" font-size="10">New</text>
+
+                        <rect x="330" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('italy')" />
+                        <text x="390" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇮🇹 Italy</text>
+                        <text x="390" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Rome/Venice</text>
+                        <text x="390" y="338" text-anchor="middle" fill="#bfdbfe" font-size="10">New</text>
+
+                        <rect x="470" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('turkey')" style="filter: brightness(1.15);" />
+                        <text x="530" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇹🇷 Turkey</text>
+                        <text x="530" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Istanbul/Antalya</text>
+                        <text x="530" y="338" text-anchor="middle" fill="#fef08a" font-size="10">⭐ Top</text>
+
+                        <rect x="610" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('greece')" />
+                        <text x="670" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇬🇷 Greece</text>
+                        <text x="670" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Athens/Islands</text>
+                        <text x="670" y="338" text-anchor="middle" fill="#fde047" font-size="10">Setup</text>
+
+                        <rect x="750" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('uae')" />
+                        <text x="810" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇦🇪 UAE</text>
+                        <text x="810" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Dubai/Abu Dhabi</text>
+                        <text x="810" y="338" text-anchor="middle" fill="white" font-size="10">Active</text>
+
+                        <rect x="890" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('austria')" />
+                        <text x="950" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇦🇹 Austria</text>
+                        <text x="950" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Vienna/Salzburg</text>
+                        <text x="950" y="338" text-anchor="middle" fill="#bfdbfe" font-size="10">New</text>
+
+                        <rect x="1030" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('czech')" />
+                        <text x="1090" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇨🇿 Czech</text>
+                        <text x="1090" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Prague</text>
+                        <text x="1090" y="338" text-anchor="middle" fill="#bfdbfe" font-size="10">New</text>
+
+                        <rect x="1170" y="280" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('slovakia')" />
+                        <text x="1230" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇸🇰 Slovakia</text>
+                        <text x="1230" y="322" text-anchor="middle" fill="#ddd6fe" font-size="9">Bratislava</text>
+                        <text x="1230" y="338" text-anchor="middle" fill="#bfdbfe" font-size="10">New</text>
+
+                        <rect x="130" y="370" width="120" height="70" rx="10" class="europe-dest" onclick="showDestination('bulgaria')" />
+                        <text x="190" y="395" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🇧🇬 Bulgaria</text>
+                        <text x="190" y="412" text-anchor="middle" fill="#ddd6fe" font-size="9">Sofia</text>
+                        <text x="190" y="428" text-anchor="middle" fill="#bfdbfe" font-size="10">New</text>
+                    </g>
+
+                    <!-- Lines Europe → India -->
+                    <path d="M 110 350 Q 110 450 300 600" class="instruction-line" stroke="#7c3aed" />
+                    <path d="M 530 350 Q 530 450 500 600" class="instruction-line" stroke="#7c3aed" />
+                    <path d="M 810 350 Q 810 450 700 600" class="instruction-line" stroke="#7c3aed" />
+                    <path d="M 1090 350 Q 1090 450 900 600" class="instruction-line" stroke="#7c3aed" />
+
+                    <!-- INDIA RESOURCE HUB -->
+                    <g class="node">
+                        <rect x="100" y="600" width="1200" height="320" rx="20" class="india-hub" opacity="0.1" stroke="#f97316" stroke-width="2" />
+                        <rect x="100" y="600" width="1200" height="60" rx="20" class="india-hub" />
+                        <text x="700" y="625" text-anchor="middle" fill="white" font-size="20" font-weight="bold">🇮🇳 INDIA EUROPEAN RESOURCE HUB</text>
+                        <text x="700" y="645" text-anchor="middle" fill="#fed7aa" font-size="13">Bengaluru • Mumbai • Gurgaon | 103+ Staff (with Destination Managers)</text>
+
+                        <!-- Existing Teams -->
+                        <g class="node" onclick="showTeam('b2c')">
+                            <rect x="120" y="680" width="180" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+                            <text x="210" y="705" text-anchor="middle" fill="#c2410c" font-size="13" font-weight="bold">B2C Sales</text>
+                            <text x="210" y="725" text-anchor="middle" fill="#f97316" font-size="20" font-weight="bold">36</text>
+                            <text x="210" y="740" text-anchor="middle" fill="#9a3412" font-size="9">Destination Experts</text>
+                        </g>
+
+                        <g class="node" onclick="showTeam('b2b')">
+                            <rect x="320" y="680" width="180" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+                            <text x="410" y="705" text-anchor="middle" fill="#c2410c" font-size="13" font-weight="bold">B2B Sales</text>
+                            <text x="410" y="725" text-anchor="middle" fill="#f97316" font-size="20" font-weight="bold">20</text>
+                            <text x="410" y="740" text-anchor="middle" fill="#9a3412" font-size="9">Tour Managers</text>
+                        </g>
+
+                        <g class="node" onclick="showTeam('ops')">
+                            <rect x="520" y="680" width="180" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+                            <text x="610" y="705" text-anchor="middle" fill="#c2410c" font-size="13" font-weight="bold">Operations</text>
+                            <text x="610" y="725" text-anchor="middle" fill="#f97316" font-size="20" font-weight="bold">20</text>
+                            <text x="610" y="740" text-anchor="middle" fill="#9a3412" font-size="9">Bookings & FIT</text>
+                        </g>
+
+                        <g class="node" onclick="showTeam('field')">
+                            <rect x="720" y="680" width="130" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+                            <text x="785" y="705" text-anchor="middle" fill="#c2410c" font-size="12" font-weight="bold">Field Sales</text>
+                            <text x="785" y="725" text-anchor="middle" fill="#f97316" font-size="18" font-weight="bold">13</text>
+                            <text x="785" y="740" text-anchor="middle" fill="#9a3412" font-size="8">TM & BDE</text>
+                        </g>
+
+                        <g class="node" onclick="showTeam('visa')">
+                            <rect x="870" y="680" width="100" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+                            <text x="920" y="705" text-anchor="middle" fill="#c2410c" font-size="12" font-weight="bold">Visa</text>
+                            <text x="920" y="725" text-anchor="middle" fill="#f97316" font-size="18" font-weight="bold">10</text>
+                            <text x="920" y="740" text-anchor="middle" fill="#9a3412" font-size="8">Processing</text>
+                        </g>
+
+                        <g class="node" onclick="showTeam('pcp')">
+                            <rect x="1000" y="680" width="140" height="70" rx="10" fill="#fefce8" stroke="#eab308" stroke-width="2" />
+                            <text x="1070" y="705" text-anchor="middle" fill="#854d0e" font-size="11" font-weight="bold">PCP Planners</text>
+                            <text x="1070" y="725" text-anchor="middle" fill="#ca8a04" font-size="18" font-weight="bold">4</text>
+                            <text x="1070" y="740" text-anchor="middle" fill="#854d0e" font-size="8">Roadshow & Training</text>
+                        </g>
+
+                        <g class="node" onclick="showTeam('kam')">
+                            <rect x="1160" y="680" width="120" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2" />
+                            <text x="1220" y="705" text-anchor="middle" fill="#c2410c" font-size="11" font-weight="bold">Key Accounts</text>
+                            <text x="1220" y="725" text-anchor="middle" fill="#f97316" font-size="18" font-weight="bold">2</text>
+                            <text x="1220" y="740" text-anchor="middle" fill="#9a3412" font-size="8">Maharashtra</text>
+                        </g>
+
+                        <!-- DESTINATION MANAGERS -->
+                        <g class="node" onclick="showDestinationManagers()">
+                            <rect x="120" y="770" width="1160" height="130" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="3" />
+                            <text x="700" y="795" text-anchor="middle" fill="#065f46" font-size="16" font-weight="bold">🎯 DESTINATION MANAGERS (Required - 10 Positions)</text>
+                            <text x="700" y="815" text-anchor="middle" fill="#059669" font-size="11">One DM per European location + Admin/Marketing support (can be pooled)</text>
+
+                            <rect x="140" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="190" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Paris DM</text>
+                            <text x="190" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="190" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="255" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="305" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Germany DM</text>
+                            <text x="305" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="305" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="370" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="420" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Italy DM</text>
+                            <text x="420" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="420" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="485" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="535" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Turkey DM</text>
+                            <text x="535" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="535" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="600" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="650" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Greece DM</text>
+                            <text x="650" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="650" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="715" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="765" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">UAE DM</text>
+                            <text x="765" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="765" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="830" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="880" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Austria DM</text>
+                            <text x="880" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="880" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="945" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="995" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Czech DM</text>
+                            <text x="995" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="995" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="1060" y="830" width="100" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="1110" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Slovakia DM</text>
+                            <text x="1110" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="1110" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+
+                            <rect x="1175" y="830" width="90" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="1" />
+                            <text x="1220" y="850" text-anchor="middle" fill="#065f46" font-size="9" font-weight="bold">Bulgaria DM</text>
+                            <text x="1220" y="865" text-anchor="middle" fill="#059669" font-size="7">+ Admin/Mktg</text>
+                            <text x="1220" y="877" text-anchor="middle" fill="#dc2626" font-size="8" font-weight="bold">VACANT</text>
+                        </g>
+                    </g>
+
+                    <!-- Labels -->
+                    <text x="300" y="240" fill="#3b82f6" font-size="11" font-weight="600">Contract Negotiation</text>
+                    <text x="600" y="240" fill="#3b82f6" font-size="11" font-weight="600">Rate Management</text>
+                    <text x="950" y="240" fill="#3b82f6" font-size="11" font-weight="600">Product Strategy</text>
+
+                    <text x="200" y="500" fill="#7c3aed" font-size="11" font-weight="600">Product Loading</text>
+                    <text x="550" y="500" fill="#7c3aed" font-size="11" font-weight="600">Sales Execution</text>
+                    <text x="850" y="500" fill="#7c3aed" font-size="11" font-weight="600">Operations</text>
+                </svg>
+            </div>
+            <!-- UK-India Liaison Workflow -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <i class="fas fa-exchange-alt text-blue-600"></i>
+                    UK-India Liaison & Contracting Workflow
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-blue-50 rounded-xl p-4 border-l-4 border-blue-500">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm">1</div>
+                            <h4 class="font-bold text-blue-900">UK Identifies Need</h4>
+                        </div>
+                        <p class="text-sm text-blue-800">UK Commercial team identifies holiday types required for Indian travellers and then manages contracting for each destination based on market demand</p>
+                    </div>
+                    <div class="bg-indigo-50 rounded-xl p-4 border-l-4 border-indigo-500">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-sm">2</div>
+                            <h4 class="font-bold text-indigo-900">India DM Briefed</h4>
+                        </div>
+                        <p class="text-sm text-indigo-800">Destination Manager in India advises on requirements f holiday types and local market needs</p>
+                    </div>
+                    <div class="bg-purple-50 rounded-xl p-4 border-l-4 border-purple-500">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm">3</div>
+                            <h4 class="font-bold text-purple-900">UK Contracts</h4>
+                        </div>
+                        <p class="text-sm text-purple-800">UK team negotiates and contracts with European suppliers (hotels, DMCs, transport)</p>
+                    </div>
+                    <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-orange-500">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm">4</div>
+                            <h4 class="font-bold text-orange-900">India Executes</h4>
+                        </div>
+                        <p class="text-sm text-orange-800">India DM loads products, manages sales, and reports performance back to UK</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout: Fleet & Business Streams -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column: Fleet Business Streams (2/3 width) -->
+                <div class="lg:col-span-2 space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-briefcase text-purple-600"></i>
+                        Business Streams
+                    </h3>
+
+                    <!-- Fixed Departures -->
+                    <div class="business-card bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-purple-900">A. Fixed Departures</h4>
+                                <p class="text-sm text-purple-700">Scheduled tours with set departure dates</p>
+                            </div>
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">Pre-negotiated</span>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                                <p>Pre-negotiate transport costs with suppliers (e.g., <strong>Adonis</strong>)</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                                <p>49-seat coach costs around <strong>€750 per day</strong></p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                                <p>Load cost as nett per seat based on expected occupancy (e.g., 30 passengers)</p>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded-lg mt-3">
+                                <p class="font-semibold text-purple-900">Example: £25 per pax per day</p>
+                                <p class="text-xs text-purple-700 mt-1">If bus fills, margin increases. System holds inventory and pricing for seamless booking management.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ad-Hoc / Bespoke -->
+                    <div class="business-card bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-blue-900">B. Ad-Hoc / Bespoke Tours</h4>
+                                <p class="text-sm text-blue-700">Tailor-made multi-centre European itineraries</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">On-demand</span>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                <p>Multi-centre European itineraries for smaller groups (4-8 pax)</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                <p>Request quote from supplier (<strong>Adonis</strong>) per itinerary</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                                <p>Build custom pricing and send to client/agent</p>
+                            </div>
+                            <div class="bg-blue-50 p-3 rounded-lg mt-3">
+                                <p class="font-semibold text-blue-900">Minivans for 4-8 passengers</p>
+                                <p class="text-xs text-blue-700 mt-1">One-off or custom pricing - not pre-loaded like fixed departures</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub-Leasing -->
+                    <div class="business-card bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-green-900">C. Sub-Leasing</h4>
+                                <p class="text-sm text-green-700">Fleet leased to 3rd parties</p>
+                            </div>
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Passive Income</span>
+                        </div>
+                        <div class="space-y-3 text-sm text-slate-700">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p>Lease fleet vehicles to 3rd parties for their own tours or transport services</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p>No operational costs on our side</p>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg mt-3">
+                                <p class="font-semibold text-green-900">Revenue Share Model</p>
+                                <p class="text-xs text-green-700 mt-1">Receive summary from Adonis once vehicles are deployed and completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Fleet Overview (1/3 width) -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-bus text-cyan-600"></i>
+                        Fleet Overview
+                    </h3>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="space-y-4">
+                            <!-- Vans -->
+                            <div class="fleet-item rounded-xl p-4 border border-sky-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-sky-100 p-2 rounded-lg">
+                                            <i class="fas fa-shuttle-van text-sky-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-sky-900">Vans</h4>
+                                            <p class="text-xs text-sky-700">Flexible transport</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-3xl font-bold text-sky-600">65</span>
+                                </div>
+                                <p class="text-xs text-slate-600">Smaller groups & airport transfers</p>
+                            </div>
+
+                            <!-- Sprinter Vans -->
+                            <div class="fleet-item rounded-xl p-4 border border-sky-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-sky-100 p-2 rounded-lg">
+                                            <i class="fas fa-truck text-sky-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-sky-900">Sprinter Vans</h4>
+                                            <p class="text-xs text-sky-700">Mid-sized</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-3xl font-bold text-sky-600">2</span>
+                                </div>
+                                <p class="text-xs text-slate-600">Mid-sized transport needs</p>
+                            </div>
+
+                            <!-- Coaches -->
+                            <div class="fleet-item rounded-xl p-4 border border-sky-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-sky-100 p-2 rounded-lg">
+                                            <i class="fas fa-bus text-sky-600 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-sky-900">Coaches</h4>
+                                            <p class="text-xs text-sky-700">Large groups</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-3xl font-bold text-sky-600">15</span>
+                                </div>
+                                <p class="text-xs text-slate-600">49-60 seats for group tours</p>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl p-4 text-white">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-bold text-lg">Total Fleet</h4>
+                                        <p class="text-cyan-100 text-sm">Managed by Adonis</p>
+                                    </div>
+                                    <span class="text-4xl font-bold">82</span>
+                                </div>
+                            </div>
+
+                            <!-- Fleet Note -->
+                            <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                                <p class="text-xs text-amber-800">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    <strong>Note:</strong> Coaches also need operational management for Fixed Departures, Ad-Hoc, and Sub-Leasing arrangements
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Supplier -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h4 class="font-bold text-slate-800 mb-3">Key Transport Partner</h4>
+                        <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                            <div class="bg-slate-200 p-3 rounded-full">
+                                <i class="fas fa-handshake text-slate-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-800">Adonis</h5>
+                                <p class="text-xs text-slate-600">Primary transport supplier for all business streams</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white text-center">
+                    <div class="text-3xl font-bold">10</div>
+                    <div class="text-sm text-blue-100">Destinations</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 text-white text-center">
+                    <div class="text-3xl font-bold">TBC</div>
+                    <div class="text-sm text-purple-100">Active Contracts</div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4 text-white text-center">
+                    <div class="text-3xl font-bold">103+</div>
+                    <div class="text-sm text-orange-100">India Staff</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white text-center">
+                    <div class="text-3xl font-bold">10</div>
+                    <div class="text-sm text-green-100">DMs Needed</div>
+                </div>
+                <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl p-4 text-white text-center">
+                    <div class="text-3xl font-bold">82</div>
+                    <div class="text-sm text-cyan-100">Fleet Vehicles</div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB 2: EUROPEAN ROADSHOW -->
+        <div id="content-roadshow" class="tab-content hidden">
+            <div class="space-y-8">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-white/20 p-4 rounded-xl">
+                            <i class="fas fa-handshake text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold">European Roadshow & Training Program</h2>
+                            <p class="text-indigo-100">7-Day India Training Tour for European Partners & Staff</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4 mt-6">
+                        <div class="bg-white/10 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold">7</div>
+                            <div class="text-xs text-indigo-100">Days</div>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold">20</div>
+                            <div class="text-xs text-indigo-100">Delegates</div>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold">3</div>
+                            <div class="text-xs text-indigo-100">Cities</div>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold">20min</div>
+                            <div class="text-xs text-indigo-100">Sessions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roadshow Overview -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left: Itinerary -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                                <i class="fas fa-route text-indigo-600"></i>
+                                7-Day Itinerary Overview
+                            </h3>
+
+                            <div class="space-y-6">
+                                <div class="timeline-item">
+                                    <div class="bg-indigo-50 rounded-xl p-4 border-l-4 border-indigo-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-indigo-900">Day 1: Arrival & Welcome</h4>
+                                            <span class="bg-indigo-100 text-indigo-700 px-2 py-1 rounded text-xs font-semibold">Mumbai</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Arrival of European delegates, welcome dinner, orientation session</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="bg-blue-50 rounded-xl p-4 border-l-4 border-blue-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-blue-900">Day 2: Speed Dating Sessions</h4>
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-semibold">Mumbai</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">20-minute rotation sessions with India sales teams. Each European delegate meets 15-20 agents.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="bg-purple-50 rounded-xl p-4 border-l-4 border-purple-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-purple-900">Day 3: Product Training</h4>
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold">Mumbai</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Deep-dive training on European products, USPs, and selling points. Hotel presentations.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="bg-pink-50 rounded-xl p-4 border-l-4 border-pink-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-pink-900">Day 4: Travel to Delhi</h4>
+                                            <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-semibold">Travel</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Morning flight to Delhi. Afternoon cultural tour. Evening networking dinner.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="bg-orange-50 rounded-xl p-4 border-l-4 border-orange-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-orange-900">Day 5: Delhi Roadshow</h4>
+                                            <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold">Delhi</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Full day speed-dating with Delhi/NCR agents. Evening feedback session.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="bg-teal-50 rounded-xl p-4 border-l-4 border-teal-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-teal-900">Day 6: Bengaluru Roadshow</h4>
+                                            <span class="bg-teal-100 text-teal-700 px-2 py-1 rounded text-xs font-semibold">Bengaluru</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Morning flight to Bengaluru. Afternoon speed-dating with South India agents.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="bg-emerald-50 rounded-xl p-4 border-l-4 border-emerald-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-bold text-emerald-900">Day 7: Wrap-up & Departure</h4>
+                                            <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-semibold">Bengaluru</span>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Morning summary session, partnership agreements, departures.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Speed Dating Format -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                                <i class="fas fa-users text-pink-600"></i>
+                                Speed Dating Format
+                            </h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-4">
+                                    <div class="speed-dating-card bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-4 border border-pink-200">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">20</div>
+                                            <div>
+                                                <h4 class="font-bold text-slate-800">Minutes Per Session</h4>
+                                                <p class="text-xs text-slate-600">Structured, timed interactions</p>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Each European exhibitor has a dedicated table. Indian agents rotate every 20 minutes.</p>
+                                    </div>
+
+                                    <div class="speed-dating-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">
+                                                <i class="fas fa-table"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-slate-800">Exhibitor Setup</h4>
+                                                <p class="text-xs text-slate-600">Professional presentation space</p>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-slate-700">Each table includes: backdrop banner, product brochures, tablet for presentations, samples/giveaways.</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4">
+                                    <div class="speed-dating-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-slate-800">Daily Schedule</h4>
+                                                <p class="text-xs text-slate-600">9:00 AM - 6:00 PM</p>
+                                            </div>
+                                        </div>
+                                        <ul class="text-sm text-slate-700 space-y-1">
+                                            <li>• 9:00 - Setup & Coffee</li>
+                                            <li>• 9:30 - Session 1 begins</li>
+                                            <li>• 12:30 - Lunch break</li>
+                                            <li>• 2:00 - Afternoon sessions</li>
+                                            <li>• 6:00 - Networking drinks</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="speed-dating-card bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-4 border border-orange-200">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <div class="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">
+                                                <i class="fas fa-handshake"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-slate-800">Expected Outcomes</h4>
+                                                <p class="text-xs text-slate-600">Partnership focus</p>
+                                            </div>
+                                        </div>
+                                        <ul class="text-sm text-slate-700 space-y-1">
+                                            <li>• 300+ agent meetings</li>
+                                            <li>• Partnership agreements signed</li>
+                                            <li>• Product training completed</li>
+                                            <li>• Marketing collateral distributed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Participants & Logistics -->
+                    <div class="space-y-6">
+                        <!-- Delegate Profile -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <i class="fas fa-user-friends text-indigo-600"></i>
+                                Delegate Profile (20 Total)
+                            </h3>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-building text-blue-500"></i>
+                                        <span class="text-sm font-medium">European Hotel Partners</span>
+                                    </div>
+                                    <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-bold">8</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-bus text-purple-500"></i>
+                                        <span class="text-sm font-medium">Transport Suppliers</span>
+                                    </div>
+                                    <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">4</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-map-marked-alt text-green-500"></i>
+                                        <span class="text-sm font-medium">DMC Partners</span>
+                                    </div>
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">4</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-flag text-orange-500"></i>
+                                        <span class="text-sm font-medium">Tourist Boards</span>
+                                    </div>
+                                    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-bold">2</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fas fa-users text-pink-500"></i>
+                                        <span class="text-sm font-medium">UK Office Staff</span>
+                                    </div>
+                                    <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded text-xs font-bold">2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PCP Planner Role -->
+                        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-lg p-6 border border-amber-200">
+                            <h3 class="text-lg font-bold text-amber-900 mb-4 flex items-center gap-2">
+                                <i class="fas fa-tasks text-amber-600"></i>
+                                PCP Planner Team (India)
+                            </h3>
+
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-start gap-2">
+                                    <i class="fas fa-check-circle text-amber-600 mt-1"></i>
+                                    <p class="text-amber-900">Organise roadshow logistics & venue booking</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i class="fas fa-check-circle text-amber-600 mt-1"></i>
+                                    <p class="text-amber-900">Invite and coordinate 300+ Indian agents</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i class="fas fa-check-circle text-amber-600 mt-1"></i>
+                                    <p class="text-amber-900">Manage delegate travel & accommodation</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i class="fas fa-check-circle text-amber-600 mt-1"></i>
+                                    <p class="text-amber-900">Coordinate with UK on training content</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i class="fas fa-check-circle text-amber-600 mt-1"></i>
+                                    <p class="text-amber-900">Follow-up and partnership activation</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-4 border-t border-amber-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-bold text-amber-900">Team Size:</span>
+                                    <span class="bg-amber-200 text-amber-900 px-3 py-1 rounded-full text-sm font-bold">4 Staff</span>
+                                </div>
+                                <p class="text-xs text-amber-800 mt-2">Based in Mumbai, reports to UK Commercial</p>
+                            </div>
+                        </div>
+
+                        <!-- UK Training Trips -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <i class="fas fa-plane text-blue-600"></i>
+                                UK Training Trips
+                            </h3>
+
+                            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200 mb-4">
+                                <p class="text-sm text-blue-900 font-medium mb-2">Quarterly Program</p>
+                                <p class="text-xs text-blue-800">UK staff and European partners travel to India to participate in roadshows and conduct training.</p>
+                            </div>
+
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar text-slate-400"></i>
+                                    <span class="text-slate-700">Q1: April Roadshow</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar text-slate-400"></i>
+                                    <span class="text-slate-700">Q2: July Roadshow</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar text-slate-400"></i>
+                                    <span class="text-slate-700">Q3: Oct Roadshow</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar text-slate-400"></i>
+                                    <span class="text-slate-700">Q4: Dec Roadshow</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-white">
+                            <h4 class="font-bold mb-4">Roadshow Impact</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-100">Agent Meetings</span>
+                                    <span class="font-bold text-xl">300+</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-100">Cities Covered</span>
+                                    <span class="font-bold text-xl">3</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-100">Expected Bookings</span>
+                                    <span class="font-bold text-xl">₹5Cr+</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-100">New Partnerships</span>
+                                    <span class="font-bold text-xl">50+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB 3: ROLES & RESPONSIBILITIES -->
+        <div id="content-responsibilities" class="tab-content hidden">
+            <div class="space-y-8">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-8 text-white">
+                    <h2 class="text-3xl font-bold mb-2">Roles & Responsibilities Matrix</h2>
+                    <p class="text-emerald-100">Clear definition of UK offices, India teams, and local operations</p>
+                </div>
+
+                <!-- Three Column Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- UK Local Offices -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="bg-blue-600 p-4 text-white">
+                            <h3 class="text-lg font-bold flex items-center gap-2">
+                                <i class="fas fa-building"></i>
+                                UK / Local Offices
+                            </h3>
+                            <p class="text-sm text-blue-100">European Destination Offices</p>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Contracting & Procurement</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Contract best hotels in each destination</li>
+                                    <li>• Negotiate rates and allotments</li>
+                                    <li>• Secure preferred partnerships</li>
+                                    <li>• Manage supplier relationships</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Tour Creation</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Design tours utilising fleet from Slovakia, etc.</li>
+                                    <li>• Create fixed departure itineraries</li>
+                                    <li>• Develop bespoke tour options</li>
+                                    <li>• Package local experiences</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Fleet Management</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Coordinate with Adonis on fleet deployment</li>
+                                    <li>• Plan sub-leasing opportunities</li>
+                                    <li>• Optimise vehicle utilisation</li>
+                                    <li>• Manage maintenance schedules</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Training & Roadshows</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Organise training trips to India</li>
+                                    <li>• Participate in roadshows</li>
+                                    <li>• Present products to Indian agents</li>
+                                    <li>• Build agent relationships</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-lg p-3 mt-4">
+                                <p class="text-xs text-blue-800">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    <strong>Key Markets:</strong> Paris, Turkey, UAE (Active) + Germany, Italy, Greece, Austria, Czech, Slovakia, Bulgaria (New)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- India Team -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="bg-orange-600 p-4 text-white">
+                            <h3 class="text-lg font-bold flex items-center gap-2">
+                                <i class="fas fa-users"></i>
+                                India Team
+                            </h3>
+                            <p class="text-sm text-orange-100">Execution & Operations Hub</p>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Product Loading</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Load contracted hotels into system</li>
+                                    <li>• Upload rates and allotments</li>
+                                    <li>• Configure packages and inclusions</li>
+                                    <li>• Manage inventory availability</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Pricing Management</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Price products correctly per market</li>
+                                    <li>• Calculate margins and commissions</li>
+                                    <li>• Update seasonal pricing</li>
+                                    <li>• Monitor competitor rates</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Sales Execution</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• B2C sales (36 destination experts)</li>
+                                    <li>• B2B agent sales (20 tour managers)</li>
+                                    <li>• Field sales (13 BDEs)</li>
+                                    <li>• Key account management</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Operations</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Booking confirmations</li>
+                                    <li>• Voucher generation</li>
+                                    <li>• Customer service</li>
+                                    <li>• Issue resolution</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Destination Managers</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• One DM per destination (10 total)</li>
+                                    <li>• Liaise with UK on requirements</li>
+                                    <li>• Coordinate with sales teams</li>
+                                    <li>• Monitor destination performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PCP Planners -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                        <div class="bg-amber-600 p-4 text-white">
+                            <h3 class="text-lg font-bold flex items-center gap-2">
+                                <i class="fas fa-handshake"></i>
+                                PCP Planners
+                            </h3>
+                            <p class="text-sm text-amber-100">European Office in India</p>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="bg-amber-50 rounded-lg p-4 border border-amber-200">
+                                <h4 class="font-bold text-amber-900 text-sm mb-2">Team Structure</h4>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-amber-800">Team Size</span>
+                                    <span class="bg-amber-200 text-amber-900 px-2 py-1 rounded text-xs font-bold">4 Staff</span>
+                                </div>
+                                <p class="text-xs text-amber-700">Based in Mumbai, reports to UK Commercial</p>
+                            </div>
+
+                            <div class="border-l-4 border-amber-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Roadshow Planning</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Organise 7-day India roadshows</li>
+                                    <li>• Book venues in Mumbai/Delhi/Bengaluru</li>
+                                    <li>• Coordinate 20 European delegates</li>
+                                    <li>• Manage speed-dating logistics</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Agent Coordination</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Invite and confirm 300+ agents</li>
+                                    <li>• Manage agent registrations</li>
+                                    <li>• Coordinate meeting schedules</li>
+                                    <li>• Handle agent queries</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Training Support</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Coordinate UK training trips</li>
+                                    <li>• Prepare training materials</li>
+                                    <li>• Arrange delegate accommodation</li>
+                                    <li>• Manage travel logistics</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-bold text-slate-800 text-sm mb-2">Follow-up & Activation</h4>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    <li>• Post-roadshow follow-up</li>
+                                    <li>• Partnership activation</li>
+                                    <li>• Performance tracking</li>
+                                    <li>• ROI reporting to UK</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg p-3 mt-4">
+                                <p class="text-xs text-amber-900">
+                                    <i class="fas fa-lightbulb mr-1"></i>
+                                    <strong>Key Metric:</strong> Target 300+ agent meetings per roadshow, 50+ new partnerships, ₹5Cr+ booking pipeline
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Existing Staff Coverage -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <i class="fas fa-user-check text-green-600"></i>
+                        Current Staff Coverage Analysis
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-green-900">🇹🇷 Turkey</h4>
+                                <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">Covered</span>
+                            </div>
+                            <p class="text-sm text-green-800 mb-2"><strong>Current:</strong> Saif Ansar Khan (Contracting Head) + Puja (FIT Ops)</p>
+                            <p class="text-xs text-green-700">Top performer with dedicated focus from Mumbai team</p>
+                        </div>
+
+                        <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-green-900">🇫🇷 Paris</h4>
+                                <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">Covered</span>
+                            </div>
+                            <p class="text-sm text-green-800 mb-2"><strong>Current:</strong> B2C Team (Martina, Tejas, Vijrambha) + B2B Team</p>
+                            <p class="text-xs text-green-700">Active market with established sales processes</p>
+                        </div>
+
+                        <div class="bg-green-50 rounded-xl p-4 border border-green-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-green-900">🇦🇪 UAE</h4>
+                                <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">Covered</span>
+                            </div>
+                            <p class="text-sm text-green-800 mb-2"><strong>Current:</strong> Operations team + B2C/B2B sales</p>
+                            <p class="text-xs text-green-700">Active market with ongoing operations support</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-red-900">🇩🇪 Germany</h4>
+                                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs">Vacant</span>
+                            </div>
+                            <p class="text-sm text-red-800 mb-2"><strong>Need:</strong> Destination Manager + Admin support</p>
+                            <p class="text-xs text-red-700">New market - no dedicated coverage yet</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-red-900">🇮🇹 Italy</h4>
+                                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs">Vacant</span>
+                            </div>
+                            <p class="text-sm text-red-800 mb-2"><strong>Need:</strong> Destination Manager + Admin support</p>
+                            <p class="text-xs text-red-700">New market - no dedicated coverage yet</p>
+                        </div>
+
+                        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-yellow-900">🇬🇷 Greece</h4>
+                                <span class="bg-yellow-500 text-white px-2 py-1 rounded text-xs">Setup</span>
+                            </div>
+                            <p class="text-sm text-yellow-800 mb-2"><strong>Current:</strong> Limited ops support</p>
+                            <p class="text-xs text-yellow-700">Setup phase - DM needed for launch</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-red-900">🇦🇹 Austria</h4>
+                                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs">Vacant</span>
+                            </div>
+                            <p class="text-sm text-red-800 mb-2"><strong>Need:</strong> Destination Manager</p>
+                            <p class="text-xs text-red-700">New market - can share admin with Czech</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-red-900">🇨🇿 Czech</h4>
+                                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs">Vacant</span>
+                            </div>
+                            <p class="text-sm text-red-800 mb-2"><strong>Need:</strong> Destination Manager</p>
+                            <p class="text-xs text-red-700">New market - can share admin with Austria</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-red-900">🇸🇰 Slovakia</h4>
+                                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs">Vacant</span>
+                            </div>
+                            <p class="text-sm text-red-800 mb-2"><strong>Need:</strong> Destination Manager</p>
+                            <p class="text-xs text-red-700">New market - fleet hub potential</p>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-4 border border-red-200">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-red-900">🇧🇬 Bulgaria</h4>
+                                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs">Vacant</span>
+                            </div>
+                            <p class="text-sm text-red-800 mb-2"><strong>Need:</strong> Destination Manager</p>
+                            <p class="text-xs text-red-700">New market - emerging destination</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-slate-50 rounded-xl p-4 border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-2">Hiring Priority Recommendation</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">1. Turkey DM (Dedicated focus needed)</span>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-semibold">2. Paris DM (Volume support)</span>
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">3. Greece DM (Launch readiness)</span>
+                            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">4-10. Other DMs (As markets develop)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <h3 id="modal-title" class="text-xl font-bold text-slate-800">Details</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-2"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto flex-1"></div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+
+            // Update tab styles
+            document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('tab-inactive');
+            });
+
+            document.getElementById('tab-' + tabName).classList.remove('tab-inactive');
+            document.getElementById('tab-' + tabName).classList.add('tab-active');
+        }
+
+        // Staff data
+        const staffData = {
+            b2c: { title: "B2C Sales Team (36 staff)", description: "Destination Experts selling directly to consumers", staff: [{name:"Tejas C",role:"Destination Expert",email:"tejas.c@tripfactory.travel",location:"Bengaluru",manager:"Martina Vasan"},{name:"Vijrambha Gowda",role:"Destination Expert",email:"vijrambha.g@tripfactory.travel",location:"Bengaluru",manager:"Martina Vasan"},{name:"Martina Vasan",role:"Assistant Manager",email:"martina.v@tripfactory.com",location:"Bengaluru",manager:"Lalitha Krishna"}] },
+            b2b: { title: "B2B Sales Team (20 staff)", description: "Tour Managers and Destination Experts for agent sales", staff: [{name:"Varsha R",role:"Destination Expert",email:"varsha.r@tripfactory.com",location:"Bengaluru",manager:"Sonu Kumar"},{name:"Sonu Kumar",role:"Assistant Manager",email:"sonu.k@tripfactory.com",location:"Bengaluru",manager:"Lalitha Krishna"},{name:"Saif Ansar Khan",role:"Contracting & Marketing Head",email:"saif@tripfactory.com",location:"Mumbai",manager:"Amit Aggarwal"}] },
+            ops: { title: "Operations Team (20 staff)", description: "Bookings, FIT operations, customer experience", staff: [{name:"Puja Vivekanand Onekar",role:"FIT Operations Head - Europe",email:"puja@tripfactory.com",location:"Mumbai",manager:"Saif Ansar Khan"},{name:"Ira Mukund Bhatt",role:"Europe Customer Experience",email:"ira.b@tripfactory.com",location:"Mumbai",manager:"Saif Ansar Khan"}] },
+            field: { title: "Field Sales (13 staff)", description: "Business Development Executives and Tour Managers", staff: [{name:"Prashant Kalendra Manchkar",role:"Tour Manager/Field Sales",email:"p.manchkar@tripfactory.travel",location:"Mumbai",manager:"Amir Shafi Shaikh"},{name:"Raaj Navgrahe",role:"Tour Manager/Field Sales (Pune)",email:"raaj.n@tripfactory.travel",location:"Pune",manager:"Akbar Pasha"}] },
+            visa: { title: "Visa Team (10 staff)", description: "End-to-end visa processing", staff: [{name:"Visa Processing Team",role:"Visa Processing",email:"visa@tripfactory.com",location:"Mumbai/Bengaluru",manager:"Operations Head"}] },
+            pcp: { title: "PCP Planners (4 staff)", description: "Roadshow planning and training coordination", staff: [{name:"PCP Planner 1",role:"Senior Roadshow Coordinator",email:"pcp1@tripfactory.com",location:"Mumbai",manager:"UK Commercial"},{name:"PCP Planner 2",role:"Agent Relations",email:"pcp2@tripfactory.com",location:"Mumbai",manager:"UK Commercial"},{name:"PCP Planner 3",role:"Logistics Coordinator",email:"pcp3@tripfactory.com",location:"Mumbai",manager:"UK Commercial"},{name:"PCP Planner 4",role:"Training Coordinator",email:"pcp4@tripfactory.com",location:"Mumbai",manager:"UK Commercial"}] },
+            kam: { title: "Key Account Managers (2 staff)", description: "Maharashtra agent management", staff: [{name:"Raheela Abdul Aziz Kaware",role:"Key Account Manager",email:"raheela.kaware@tripfactory.travel",location:"Mumbai",manager:"Amir Shafi Shaikh"},{name:"Minal Siddhesh Bhagat",role:"Key Account Manager",email:"bhagat.m@tripfactory.travel",location:"Mumbai",manager:"Amir Shafi Shaikh"}] }
+        };
+
+        const destinationData = {
+            paris: { name: "🇫🇷 Paris, France", status: "Active", contracts: "TBC - In negotiation", pax: "1,247 MTD", revenue: "₹1.8Cr", focus: "Romance, City Breaks", dm: "VACANT - Destination Manager needed", current: "B2C/B2B teams covering" },
+            germany: { name: "🇩🇪 Germany", status: "New Market", contracts: "In negotiation", pax: "-", revenue: "-", focus: "Business, Culture", dm: "VACANT - Destination Manager needed", current: "No dedicated coverage" },
+            italy: { name: "🇮🇹 Italy", status: "New Market", contracts: "In negotiation", pax: "-", revenue: "-", focus: "Heritage, Food & Wine", dm: "VACANT - Destination Manager needed", current: "No dedicated coverage" },
+            turkey: { name: "🇹🇷 Turkey", status: "⭐ Top Performer", contracts: "TBC - Under review", pax: "1,436 MTD", revenue: "₹1.4Cr", focus: "Beach, Culture, Halal", dm: "VACANT - Saif currently covering", current: "Saif + Puja managing" },
+            greece: { name: "🇬🇷 Greece", status: "Setup Phase", contracts: "8 Hotels, 3 DMCs", pax: "Launch Q2", revenue: "-", focus: "Islands, History", dm: "VACANT - Destination Manager needed", current: "Limited ops support" },
+            uae: { name: "🇦🇪 UAE", status: "Active", contracts: "TBC - Under review", pax: "892 MTD", revenue: "₹0.8Cr", focus: "Luxury, Shopping", dm: "VACANT - Destination Manager needed", current: "Operations team covering" },
+            austria: { name: "🇦🇹 Austria", status: "New Market", contracts: "In negotiation", pax: "-", revenue: "-", focus: "Ski, Culture", dm: "VACANT - Destination Manager needed", current: "No dedicated coverage" },
+            czech: { name: "🇨🇿 Czech Republic", status: "New Market", contracts: "In negotiation", pax: "-", revenue: "-", focus: "City Breaks, Heritage", dm: "VACANT - Destination Manager needed", current: "No dedicated coverage" },
+            slovakia: { name: "🇸🇰 Slovakia", status: "New Market", contracts: "3 Hotels, 1 DMC", pax: "Q3 Target", revenue: "-", focus: "Nature, Emerging", dm: "VACANT - Destination Manager needed", current: "No dedicated coverage" },
+            bulgaria: { name: "🇧🇬 Bulgaria", status: "New Market", contracts: "In negotiation", pax: "-", revenue: "-", focus: "Beach, Value", dm: "VACANT - Destination Manager needed", current: "No dedicated coverage" }
+        };
+
+        function showTeam(teamKey) {
+            const team = staffData[teamKey];
+            const content = document.getElementById('modal-content');
+            let staffHtml = team.staff.map(person => `
+                <div class="staff-card bg-white border border-slate-200 rounded-xl p-4 mb-3">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h4 class="font-bold text-slate-800 text-lg">${person.name}</h4>
+                                <span class="location-badge ${person.location.toLowerCase().includes('bengaluru') ? 'blr' : person.location.toLowerCase().includes('mumbai') ? 'bom' : 'gur'}">${person.location}</span>
+                            </div>
+                            <p class="text-blue-600 font-medium text-sm mb-1">${person.role}</p>
+                            <a href="mailto:${person.email}" class="email-link text-sm flex items-center gap-1">
+                                <i class="fas fa-envelope text-xs"></i> ${person.email}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-slate-100">
+                        <p class="text-xs text-slate-500"><i class="fas fa-user-tie mr-1"></i> Reports to: <span class="font-medium text-slate-700">${person.manager}</span></p>
+                    </div>
+                </div>
+            `).join('');
+
+            content.innerHTML = `<div class="mb-6"><h2 class="text-2xl font-bold text-slate-800 mb-2">${team.title}</h2><p class="text-slate-600">${team.description}</p></div><div class="grid gap-3">${staffHtml}</div>`;
+            document.getElementById('modal-title').textContent = team.title;
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+        }
+
+        function showDestination(destKey) {
+            const dest = destinationData[destKey];
+            document.getElementById('modal-title').textContent = dest.name;
+            document.getElementById('modal-content').innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl"><div class="text-sm text-slate-500 mb-1">Status</div><div class="font-bold text-slate-800">${dest.status}</div></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><div class="text-sm text-slate-500 mb-1">Focus</div><div class="font-bold text-slate-800">${dest.focus}</div></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><div class="text-sm text-slate-500 mb-1">Contracts</div><div class="font-bold text-slate-800">${dest.contracts}</div></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><div class="text-sm text-slate-500 mb-1">MTD PAX</div><div class="font-bold text-slate-800">${dest.pax}</div></div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-users text-blue-500"></i>
+                            <h4 class="font-bold text-blue-900">Current Coverage</h4>
+                        </div>
+                        <p class="text-sm text-blue-800">${dest.current}</p>
+                    </div>
+                    <div class="bg-red-50 border-2 border-red-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-exclamation-triangle text-red-500"></i>
+                            <h4 class="font-bold text-red-900">Destination Manager Required</h4>
+                        </div>
+                        <p class="text-sm text-red-800">${dest.dm}</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <h4 class="font-semibold text-blue-900 mb-2">UK Management</h4>
+                        <p class="text-sm text-blue-800">Contracting, rate negotiations, and supplier management handled by UK team.</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+        }
+
+        function showDestinationManagers() {
+            document.getElementById('modal-title').textContent = '🎯 Destination Managers Structure';
+            document.getElementById('modal-content').innerHTML = `
+                <div class="space-y-6">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                        <h4 class="font-bold text-emerald-900 mb-2">Required Structure (10 Positions)</h4>
+                        <p class="text-sm text-emerald-800">Each European destination requires a dedicated Destination Manager in India with supporting admin and marketing functions (can be pooled across similar destinations).</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white border border-slate-200 rounded-xl p-4">
+                            <h5 class="font-bold text-slate-800 mb-3">Destination Manager Responsibilities</h5>
+                            <ul class="space-y-2 text-sm text-slate-700">
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i> Liaise with UK on contracting requirements</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i> Load contracted products into system</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i> Manage local supplier relationships</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i> Coordinate with sales teams</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i> Monitor destination performance</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i> Report to UK Commercial</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-xl p-4">
+                            <h5 class="font-bold text-slate-800 mb-3">Support Functions (Pooled)</h5>
+                            <ul class="space-y-2 text-sm text-slate-700">
+                                <li class="flex items-start gap-2"><i class="fas fa-users text-blue-500 mt-1"></i> <strong>Admin Support:</strong> Booking management, documentation</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-bullhorn text-pink-500 mt-1"></i> <strong>Marketing:</strong> Destination campaigns, content</li>
+                                <li class="flex items-start gap-2"><i class="fas fa-headset text-orange-500 mt-1"></i> <strong>Operations:</strong> QC, customer service</li>
+                            </ul>
+                            <p class="text-xs text-slate-500 mt-3">*Can be shared across 2-3 similar destinations (e.g., Austria + Czech, Slovakia + Bulgaria)</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl p-4">
+                        <h5 class="font-bold text-slate-800 mb-3">Priority Hiring Order</h5>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 p-2 bg-white rounded-lg border-l-4 border-red-500">
+                                <span class="font-bold text-red-600">1</span>
+                                <span class="text-sm">Turkey DM (Top performer, needs dedicated focus)</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 bg-white rounded-lg border-l-4 border-orange-500">
+                                <span class="font-bold text-orange-600">2</span>
+                                <span class="text-sm">Paris DM (Established market, high volume)</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 bg-white rounded-lg border-l-4 border-yellow-500">
+                                <span class="font-bold text-yellow-600">3</span>
+                                <span class="text-sm">UAE DM (Active market, luxury focus)</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 bg-white rounded-lg border-l-4 border-blue-500">
+                                <span class="font-bold text-blue-600">4-10</span>
+                                <span class="text-sm">Germany, Italy, Greece, Austria, Czech, Slovakia, Bulgaria DMs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+        }
+
+        function showUKDetails() {
+            document.getElementById('modal-title').textContent = '🇬🇧 UK Command Centre';
+            document.getElementById('modal-content').innerHTML = `
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <h4 class="font-bold text-blue-900 mb-2">London Headquarters</h4>
+                        <p class="text-sm text-blue-800">Controls all European ORN operations. Manages supplier contracting, sets commercial strategy, and directs India execution teams.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <div class="font-bold text-slate-800 mb-1">Contracting</div>
+                            <div class="text-sm text-slate-600">Negotiate rates, secure allotments, manage supplier contracts across 10 destinations</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <div class="font-bold text-slate-800 mb-1">Commercial</div>
+                            <div class="text-sm text-slate-600">Set pricing strategy, targets, and market priorities</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <div class="font-bold text-slate-800 mb-1">Creative</div>
+                            <div class="text-sm text-slate-600">Produce marketing assets, photography, destination content</div>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <div class="font-bold text-slate-800 mb-1">Admin</div>
+                            <div class="text-sm text-slate-600">Coordinate UK-India workflows, reporting, QC oversight</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('modal').classList.remove('flex');
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+    </script>
+</body>
+</html>
